@@ -16,6 +16,11 @@ def index(request):
         "entries": util.list_entries()
     })
 
-
+def entry(request, title):
+    html_content = convert_md_to_html(title)
+    if html_content is None:
+        return render(request, "encyclopedia/404.html",{"title": title})
+    else:
+        return render(request, "encyclopedia/entry.html", {"title":title, "content":html_content})
    
 
